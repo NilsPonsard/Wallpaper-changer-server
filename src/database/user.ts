@@ -1,4 +1,6 @@
 import { DataTypes, Model } from 'https://deno.land/x/denodb@v1.0.40/mod.ts';
+import { ClientToken } from './client_token.ts';
+import { Token } from './token.ts';
 import { Wallpaper } from './wallpaper.ts';
 
 export class User extends Model {
@@ -27,12 +29,20 @@ export class User extends Model {
     },
     bio: {
       type: DataTypes.STRING,
-      length:4000 ,
+      length: 4000,
       allowNull: true,
-    }
+    },
   };
 
   static wallpapers() {
     return this.hasMany(Wallpaper);
+  }
+
+  static tokens() {
+    return this.hasMany(Token);
+  }
+
+  static clientTokens() {
+    return this.hasMany(ClientToken);
   }
 }

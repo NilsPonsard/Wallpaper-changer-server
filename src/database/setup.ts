@@ -1,9 +1,11 @@
-import { Database, PostgresConnector, Relationships } from "https://deno.land/x/denodb@v1.0.40/mod.ts";
-import { Token } from "./token.ts";
+import { Database, PostgresConnector, Relationships } from 'https://deno.land/x/denodb@v1.0.40/mod.ts';
+import { ClientToken } from './client_token.ts';
+import { Token } from './token.ts';
 import { User } from './user.ts';
 import { Wallpaper } from './wallpaper.ts';
 
-const tables = [User, Wallpaper,Token];
+const tables = [User, Wallpaper, Token, ClientToken];
+Relationships.oneToOne(ClientToken, User);
 Relationships.belongsTo(Wallpaper, User);
 Relationships.belongsTo(Token, User);
 
