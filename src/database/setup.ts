@@ -1,10 +1,11 @@
 import { Database, PostgresConnector, Relationships } from "https://deno.land/x/denodb@v1.0.40/mod.ts";
+import { Token } from "./token.ts";
 import { User } from './user.ts';
 import { Wallpaper } from './wallpaper.ts';
 
-const tables = [User, Wallpaper];
-
+const tables = [User, Wallpaper,Token];
 Relationships.belongsTo(Wallpaper, User);
+Relationships.belongsTo(Token, User);
 
 // Setup database connection and schemas
 export async function setup() {

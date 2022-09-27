@@ -9,6 +9,7 @@ router.get('/', list);
 router.post('/register', register);
 router.post('/login', login);
 router.get('/:id', get);
+router.post('/refresh', refresh);
 
 async function list(ctx: RouterCTX) {
   // TODO: Implement
@@ -23,5 +24,9 @@ async function login(ctx: RouterCTX) {
 }
 
 async function get(ctx: RouterCTX) {
+  // TODO: Implement
+}
+
+async function refresh(ctx: RouterCTX) {
   // TODO: Implement
 }

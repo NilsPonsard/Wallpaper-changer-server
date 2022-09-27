@@ -25,6 +25,11 @@ export class User extends Model {
       length: 255,
       allowNull: false,
     },
+    bio: {
+      type: DataTypes.STRING,
+      length:4000 ,
+      allowNull: true,
+    }
   };
 
   static wallpapers() {

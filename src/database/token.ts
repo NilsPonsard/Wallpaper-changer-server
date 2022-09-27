@@ -1,8 +1,8 @@
-import { DataTypes, Model } from 'https://deno.land/x/denodb@v1.0.40/mod.ts';
-import { User } from './user.ts';
+import { DataTypes, Model } from "https://deno.land/x/denodb@v1.0.40/mod.ts";
+import { User } from "./user.ts";
 
-export class Wallpaper extends Model {
-  static table = 'wallpapers';
+export class Token extends Model {
+  static table = 'tokens';
   static timestamps = true;
 
   static fields = {
@@ -10,19 +10,19 @@ export class Wallpaper extends Model {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    access: {
       type: DataTypes.STRING,
-      length: 255,
+      length: 500,
       allowNull: false,
     },
-    url: {
+    refresh: {
       type: DataTypes.STRING,
-      length: 4000,
+      length: 500,
       allowNull: false,
     },
   };
 
-  static postedBy() {
+  static user() {
     return this.hasOne(User);
   }
 }

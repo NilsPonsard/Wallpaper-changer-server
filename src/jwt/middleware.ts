@@ -1,29 +1,33 @@
 import { appContext } from '../api/serialization.ts';
 
-import { create, verify } from 'https://deno.land/x/djwt@v2.7/mod.ts';
-import { User } from '../database/user.ts';
-import { config } from '../../config.ts';
+import { verifyToken } from './token.ts';
+import { Token } from '../database/token.ts';
 
 export async function jwtMiddleware(ctx: appContext, next: () => Promise<void>) {
+  const { request, state } = ctx;
   try {
-    const { request, state } = ctx;
-
     const jwt = request.headers.get('authorization')?.split('bearer ')?.[1] || '';
 
-    const validatedJwt = await verify(jwt, config.JWT_SECRET);
+    const validatedJwt = await verifyToken(jwt);
 
     if (!validatedJwt) {
       state.user = null;
     }
 
-    const user = await User.findOneById(validatedJwt?.payload?.id! as string);
-    if (!user) {
+    try {
+      const user = await Token.where('access', jwt).user();
+
+      if (!user) {
+        state.user = null;
+      }
+
+      state.user = user;
+    } catch (_) {
       state.user = null;
     }
-
-    state.user = user;
     await next();
   } catch (error) {
-    throw error;
+    console.log(error);
+    state.user = null;
   }
 }
