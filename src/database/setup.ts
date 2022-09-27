@@ -3,9 +3,14 @@ import { Token } from './token.ts';
 import { User } from './user.ts';
 import { Wallpaper } from './wallpaper.ts';
 
-const tables = [User, Wallpaper, Token];
-Relationships.belongsTo(Wallpaper, User, { foreignKey: 'user_id' });
-Relationships.belongsTo(Token, User, { foreignKey: 'user_id' });
+// posted for
+export const PostedFor = Relationships.manyToMany(Wallpaper, User);
+
+// posted by
+Relationships.belongsTo(Wallpaper, User, { foreignKey: 'userId' });
+Relationships.belongsTo(Token, User, { foreignKey: 'userId' });
+
+const tables = [User, Wallpaper, Token, PostedFor];
 
 // Setup database connection and schemas
 export async function setup() {

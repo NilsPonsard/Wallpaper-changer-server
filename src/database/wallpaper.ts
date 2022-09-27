@@ -10,7 +10,7 @@ export class Wallpaper extends Model {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    title: {
       type: DataTypes.STRING,
       length: 255,
       allowNull: false,
@@ -24,5 +24,9 @@ export class Wallpaper extends Model {
 
   static postedBy() {
     return this.hasOne(User);
+  }
+
+  static postedFor(){
+    return this.hasMany(User);
   }
 }

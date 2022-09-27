@@ -45,7 +45,11 @@ export class User extends Model {
   bio!: string;
   client_token!: string;
 
-  static wallpapers() {
+  static postedWallPapers() {
+    return this.hasMany(Wallpaper);
+  }
+
+  static wallpapersToShow() {
     return this.hasMany(Wallpaper);
   }
 

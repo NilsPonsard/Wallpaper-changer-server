@@ -101,7 +101,7 @@ async function refresh(ctx: apiContext) {
     return;
   }
 
-  const pair = await registerNewTokenPair(token.user_id as number);
+  const pair = await registerNewTokenPair(token.userId as number);
   token.delete();
 
   ctx.response.body = pair;

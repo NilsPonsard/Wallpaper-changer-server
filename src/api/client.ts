@@ -42,7 +42,7 @@ async function wallpaper(ctx: clientContext) {
     return;
   }
 
-  const wallpaper = await Wallpaper.where('user_id', user.id).orderBy('created_at', 'desc').first();
+  const wallpaper = await Wallpaper.where('userId', user.id).orderBy('created_at', 'desc').first();
 
   return wallpaper;
 }

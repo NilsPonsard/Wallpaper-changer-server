@@ -31,9 +31,9 @@ export async function verifyToken(token: string) {
   }
 }
 
-export async function registerNewTokenPair(user_id: number) {
+export async function registerNewTokenPair(userId: number) {
   const pair = await newTokenPair();
-  await Token.create({ access: pair.access, refresh: pair.refresh, user_id });
+  await Token.create({ access: pair.access, refresh: pair.refresh, userId });
   return pair;
 }
 
