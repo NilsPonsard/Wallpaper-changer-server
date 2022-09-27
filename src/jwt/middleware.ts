@@ -1,33 +1,26 @@
-import { appContext } from '../api/serialization.ts';
+import { apiContext } from '../api/serialization.ts';
 
-import { verifyToken } from './token.ts';
+import { checkAccessToken } from './token.ts';
 import { Token } from '../database/token.ts';
 
-export async function jwtMiddleware(ctx: appContext, next: () => Promise<void>) {
+export async function jwtMiddleware(ctx: apiContext, next: () => Promise<unknown>) {
   const { request, state } = ctx;
   try {
-    const jwt = request.headers.get('authorization')?.split('bearer ')?.[1] || '';
+    const jwt = request.headers.get('authorization')?.split('Bearer ')?.[1] || '';
 
-    const validatedJwt = await verifyToken(jwt);
-
-    if (!validatedJwt) {
-      state.user = null;
+    const valid = await checkAccessToken(jwt);
+    if (!valid) {
+      throw new Error('Invalid token');
     }
 
-    try {
-      const user = await Token.where('access', jwt).user();
+    const user = await Token.where('access', jwt).user();
 
-      if (!user) {
-        state.user = null;
-      }
-
+    if (user) {
       state.user = user;
-    } catch (_) {
-      state.user = null;
     }
-    await next();
   } catch (error) {
     console.log(error);
     state.user = null;
   }
+  await next();
 }
