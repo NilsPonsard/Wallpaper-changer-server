@@ -1,5 +1,5 @@
 import { create, getNumericDate, verify } from 'https://deno.land/x/djwt@v2.7/mod.ts';
-import { config } from '../../config.ts';
+import { config } from '../config.ts';
 import { Token } from '../database/token.ts';
 import { ACCESS_EXPIRATION, REFRESH_EXPIRATION } from './expiration.ts';
 

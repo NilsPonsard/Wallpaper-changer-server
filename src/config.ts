@@ -1,5 +1,4 @@
 import 'https://deno.land/std@0.157.0/dotenv/load.ts';
-import { create, verify } from 'https://deno.land/x/djwt@v2.7/mod.ts';
 
 const JWT_KEY = Deno.env.get('JWT_KEY');
 if (!JWT_KEY) {
@@ -12,11 +11,9 @@ export const config = {
 };
 
 async function importKeys(keypair: string) {
-  const pair = JSON.parse(atob(keypair)) as { priv: JsonWebKey; pub: JsonWebKey  };
+  const pair = JSON.parse(atob(keypair)) as { priv: JsonWebKey; pub: JsonWebKey };
   return {
     priv: await crypto.subtle.importKey('jwk', pair.priv, { name: 'ECDSA', namedCurve: 'P-384' }, true, ['sign']),
     pub: await crypto.subtle.importKey('jwk', pair.pub, { name: 'ECDSA', namedCurve: 'P-384' }, true, ['verify']),
   };
 }
-
-

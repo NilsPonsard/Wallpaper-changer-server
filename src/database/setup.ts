@@ -13,7 +13,7 @@ Relationships.belongsTo(Token, User, { foreignKey: 'userId' });
 const tables = [User, Wallpaper, Token, PostedFor];
 
 // Setup database connection and schemas
-export async function setup() {
+export default async function setup() {
   let db: Database | null = null;
 
   let connected = false;
