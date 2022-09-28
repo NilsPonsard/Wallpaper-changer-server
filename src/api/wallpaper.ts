@@ -1,8 +1,5 @@
 import { Router, RouterContext } from 'https://deno.land/x/oak@v11.1.0/router.ts';
 import { User } from '../database/user.ts';
-import { apiContext } from './serialization.ts';
-import * as bcrypt from 'https://deno.land/x/bcrypt@v0.4.0/mod.ts';
-import { checkRefreshToken, registerNewTokenPair } from '../jwt/token.ts';
 import { Wallpaper } from '../database/wallpaper.ts';
 import { PostedFor } from '../database/setup.ts';
 
