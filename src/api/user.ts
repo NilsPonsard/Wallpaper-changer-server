@@ -8,7 +8,7 @@ const router = new Router({ prefix: '/user' });
 export default router;
 
 // router.get('/', list);
-router.post('/register', register);
+router.post('/', register);
 router.post('/login', login);
 router.get('/me', me);
 router.get('/:id', get);
