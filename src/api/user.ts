@@ -22,14 +22,14 @@ router.post('/client', generateClientToken);
 // POST /user/register
 async function register(ctx: apiContext) {
   const { body_json } = ctx.state;
-  const { name, email, password, bio } = body_json as { name: string; email: string; password: string; bio: string };
+  const { username, email, password, bio } = body_json as { username: string; email: string; password: string; bio: string };
 
-  if (!email || !password || !name) {
+  if (!email || !password || !username) {
     ctx.response.status = 400;
     return;
   }
 
-  const user = await User.create({ name, email, password: await bcrypt.hash(password), bio });
+  const user = await User.create({ username, email, password: await bcrypt.hash(password), bio });
 
   ctx.response.body = user;
 }
@@ -76,7 +76,7 @@ async function get(ctx: RouterContext<'/:id'>) {
 
     ctx.response.body = {
       id: user.id,
-      name: user.name,
+      username: user.username,
       bio: user.bio,
     };
   } catch (_) {
@@ -116,7 +116,7 @@ function me(ctx: apiContext) {
     return;
   }
 
-  ctx.response.body = { id: user.id, email: user.email, name: user.name, bio: user.bio };
+  ctx.response.body = { id: user.id, email: user.email, username: user.username, bio: user.bio };
 }
 
 // POST /user/client

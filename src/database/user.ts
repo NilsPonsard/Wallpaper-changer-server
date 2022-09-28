@@ -8,10 +8,11 @@ export class User extends Model {
 
   static fields = {
     id: {
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    username: {
       type: DataTypes.STRING,
       length: 255,
       allowNull: false,
@@ -37,13 +38,6 @@ export class User extends Model {
       allowNull: true,
     },
   };
-
-  id!: number;
-  name!: string;
-  email!: string;
-  password!: string;
-  bio!: string;
-  client_token!: string;
 
   static postedWallPapers() {
     return this.hasMany(Wallpaper);

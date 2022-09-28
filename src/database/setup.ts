@@ -10,7 +10,7 @@ export const PostedFor = Relationships.manyToMany(Wallpaper, User);
 Relationships.belongsTo(Wallpaper, User, { foreignKey: 'userId' });
 Relationships.belongsTo(Token, User, { foreignKey: 'userId' });
 
-const tables = [User, Wallpaper, Token, PostedFor];
+const tables = [User,Token, Wallpaper, PostedFor];
 
 // Setup database connection and schemas
 export default async function setup() {
@@ -28,8 +28,12 @@ export default async function setup() {
       await new Promise(resolve => setTimeout(resolve, 5000));
     }
   }
+  if (!db) {
+    throw new Error('Database is not connected');
+  }
 
-  db?.link(tables);
+  db.link(tables);
+  await db.sync({ drop: false });
 }
 
 // Connect to database, throw error if cant connect

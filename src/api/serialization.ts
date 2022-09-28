@@ -6,7 +6,7 @@ export type apiContext = Context<{ body_json: unknown; user: Omit<User, 'passwor
 // parse json body
 export async function deserializerMiddleware(ctx: apiContext, next: () => Promise<unknown>) {
   try {
-    ctx.state.body_json = ctx.request.body({ type: 'json' }).value;
+    ctx.state.body_json = await ctx.request.body({ type: 'json' }).value;
   } catch (_) {
     ctx.state.body_json = null;
   }

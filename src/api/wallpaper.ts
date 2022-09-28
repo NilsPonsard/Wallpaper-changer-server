@@ -26,7 +26,7 @@ async function addWallpaper(ctx: RouterContext<'/', { userId: string }, { user: 
   const wallpaper = await Wallpaper.create({
     title: title || '',
     url,
-    userId: user.id,
+    userId: user.id as number,
   });
 
   await Promise.allSettled(

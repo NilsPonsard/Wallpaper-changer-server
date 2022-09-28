@@ -7,6 +7,7 @@ export class Wallpaper extends Model {
 
   static fields = {
     id: {
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
