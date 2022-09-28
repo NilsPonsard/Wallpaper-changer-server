@@ -1,4 +1,4 @@
-import { Database, PostgresConnector, Relationships } from 'https://deno.land/x/denodb@v1.0.40/mod.ts';
+import { Database, PostgresConnector, Relationships } from 'https://deno.land/x/denodb@v1.0.39/mod.ts';
 import { Token } from './token.ts';
 import { User } from './user.ts';
 import { Wallpaper } from './wallpaper.ts';

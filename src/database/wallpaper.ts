@@ -1,4 +1,4 @@
-import { DataTypes, Model } from 'https://deno.land/x/denodb@v1.0.40/mod.ts';
+import { DataTypes, Model } from 'https://deno.land/x/denodb@v1.0.39/mod.ts';
 import { User } from './user.ts';
 
 export class Wallpaper extends Model {
