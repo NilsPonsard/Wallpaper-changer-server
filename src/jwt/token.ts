@@ -6,7 +6,7 @@ import { ACCESS_EXPIRATION, REFRESH_EXPIRATION } from './expiration.ts';
 export async function newTokenPair() {
   const access = await newToken(ACCESS_EXPIRATION);
   const refresh = await newToken(REFRESH_EXPIRATION);
-  return { access: access.token, refresh: refresh.token };
+  return { accessToken: access.token, refreshToken: refresh.token };
 }
 
 // Create a new token and return it and the uuid
@@ -33,7 +33,7 @@ export async function verifyToken(token: string) {
 
 export async function registerNewTokenPair(userId: number) {
   const pair = await newTokenPair();
-  await Token.create({ access: pair.access, refresh: pair.refresh, userId });
+  await Token.create({ access: pair.accessToken, refresh: pair.refreshToken, userId });
   return pair;
 }
 

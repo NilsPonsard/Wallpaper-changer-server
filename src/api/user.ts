@@ -22,7 +22,12 @@ router.post('/client', generateClientToken);
 // POST /user/register
 async function register(ctx: apiContext) {
   const { body_json } = ctx.state;
-  const { username, email, password, bio } = body_json as { username: string; email: string; password: string; bio: string };
+  const { username, email, password, bio } = body_json as {
+    username: string;
+    email: string;
+    password: string;
+    bio: string;
+  };
 
   if (!email || !password || !username) {
     ctx.response.status = 400;
@@ -132,5 +137,5 @@ async function generateClientToken(ctx: apiContext) {
 
   await User.where('id', user.id as number).update({ client_token: token });
 
-  ctx.response.body = {token};
+  ctx.response.body = { token };
 }

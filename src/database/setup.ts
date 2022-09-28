@@ -10,7 +10,7 @@ export const PostedFor = Relationships.manyToMany(Wallpaper, User);
 Relationships.belongsTo(Wallpaper, User, { foreignKey: 'userId' });
 Relationships.belongsTo(Token, User, { foreignKey: 'userId' });
 
-const tables = [User,Token, Wallpaper, PostedFor];
+const tables = [User, Token, Wallpaper, PostedFor];
 
 // Setup database connection and schemas
 export default async function setup() {
@@ -33,7 +33,7 @@ export default async function setup() {
   }
 
   db.link(tables);
-  await db.sync({ drop: false });
+  // db.sync();
 }
 
 // Connect to database, throw error if cant connect
